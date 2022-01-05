@@ -5,7 +5,7 @@ export default function NewProject() {
 
     //get state from form
     const projectsContext = useContext(projectContext)
-    const {form, showForm} = projectsContext
+    const {form, errorform, showForm, addProject, showError} = projectsContext
 
 
     //states
@@ -30,10 +30,18 @@ export default function NewProject() {
         e.preventDefault()
 
         //valid projects
-
+        if(name ===''){
+            showError()
+            return
+        }
         //add state
+        addProject(project)
 
         //restart this form
+        setProject({
+            name:''
+        })
+    
     }
 
     //showform
@@ -78,6 +86,7 @@ export default function NewProject() {
 
            }
 
+           {errorform ? <p className="mensaje error">Name is mandatory</p>: null} 
 </Fragment>
     )
 }

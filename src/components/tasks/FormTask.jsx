@@ -1,6 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import projectContext from '../../context/projects/projectContext'
+
 
 export default function FormTask() {
+
+    const projectsContext = useContext(projectContext)
+    const {project} = projectsContext
+
+    if(!project) return null
+
+    const [currentProject] = project
+
     return (
         <div className="formulario">
         <form action="">

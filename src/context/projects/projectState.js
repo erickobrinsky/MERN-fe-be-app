@@ -1,7 +1,8 @@
 import React, {useReducer} from 'react'
 import projectContext from './projectContext'
 import projectReducer from './projectReducer'
-import {FORM_PROJECT, GET_PROJECTS} from '../../types'
+import {FORM_PROJECT, GET_PROJECTS, ADD_PROJECTS, VALID_FORM, CURRENT_PROJECT, DELETE_PROJECT } from '../../types'
+import {v4 as uuid} from 'uuid'
 
 
 const ProjectState = props =>{
@@ -13,7 +14,9 @@ const ProjectState = props =>{
 
     const initialState = {
          projects : [],
-        form: false
+        form: false,
+        errorform: false,
+        project: null
     }
 
     const [state, dispatch] = useReducer(projectReducer, initialState)
@@ -33,6 +36,41 @@ const ProjectState = props =>{
         })
     }
 
+    //add new project
+    const addProject = project => {
+        project.id = uuid()
+
+        //add project in the state with dispatch
+        dispatch({
+            type: ADD_PROJECTS,
+            payload: project
+        })
+    }
+
+    //valid form by errors
+    const showError = () => {
+        dispatch({
+            type: VALID_FORM,
+
+        })
+    }
+
+    //select project that user clicked
+    const currentProject = projectId => {
+        dispatch({
+            type: CURRENT_PROJECT,
+            payload: projectId
+        })
+    }
+
+    //delete projects
+    const deleteProject = projectId => {
+        dispatch({
+            type: DELETE_PROJECT,
+            payload: projectId
+        })
+    }
+
 
   
 
@@ -41,8 +79,14 @@ const ProjectState = props =>{
             value={{
                 projects: state.projects,
                 form: state.form,
+                errorform: state.errorform,
+                project: state.project,
                 showForm,
-                getProjects
+                getProjects,
+                addProject,
+                showError,
+                currentProject,
+                deleteProject
             }}
         
         >
