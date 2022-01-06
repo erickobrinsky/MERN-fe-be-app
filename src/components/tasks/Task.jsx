@@ -1,6 +1,32 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import taskContext from '../../context/tasks/taskContext'
+import projectContext from '../../context/projects/projectContext'
+
+
 
 export default function Task({task}) {
+
+    const projectsContext = useContext(projectContext)
+    const {project} = projectsContext
+
+    const tasksContext = useContext(taskContext) 
+    const {deleteTask, getTasks, changeState} = tasksContext
+  
+    //extract projec
+    const [currentProject] = project
+
+    //function that is executed when user clicked on delete task button
+    const taskDelete = id => {
+        deleteTask(id)
+        getTasks(currentProject.id)
+    }
+
+    //function to modify state
+    const changeState = task => {
+
+    }
+
+
     return (
              <li className="tarea sombra">
             <p>{task.name}</p>
@@ -10,11 +36,13 @@ export default function Task({task}) {
                     (<button
                         type="button"
                         className="completo"
+                        onClick={changeState}
                     >Complete</button>)
                 :    
                 (<button
                     type="button"
                     className="incompleto"
+                    onClick={changeState}
                 >Uncomplete</button>)
             }
             </div>
@@ -27,6 +55,7 @@ export default function Task({task}) {
                 <button
                   className="btn btn-secundario"
                   type="button"
+                  onClick={()=> taskDelete(task.id)}
                 >
                     Delete 
                 </button>

@@ -3,12 +3,14 @@ import Login from './components/auth/Login'
 import NewAccount from './components/auth/NewAccount'
 import Projects from './components/projects/Projects'
 import ProjectState from './context/projects/projectState'
+import TaskState from './context/tasks/taskState'
 
 
 
 function App() {
   return (
     <ProjectState>
+      <TaskState>
 <Router>
     <Routes>  
       <Route exact path="/" element={<Login/>}/>
@@ -16,6 +18,7 @@ function App() {
       <Route exact path="/projects" element={<Projects/>}/>
     </Routes>
 </Router>
+</TaskState>
 </ProjectState>
   );
 }
