@@ -29,6 +29,7 @@ export default function FormTask() {
             ...task,
             [e.target.name] : e.target.value
         })
+        
     }
 
     const onSubmit = e =>{

@@ -10,7 +10,7 @@ export default function Task({task}) {
     const {project} = projectsContext
 
     const tasksContext = useContext(taskContext) 
-    const {deleteTask, getTasks, changeState} = tasksContext
+    const {deleteTask, getTasks, changeStateTask} = tasksContext
   
     //extract projec
     const [currentProject] = project
@@ -23,7 +23,12 @@ export default function Task({task}) {
 
     //function to modify state
     const changeState = task => {
-
+        if(task.state){
+            task.state = false
+        } else {
+            task.state = true
+        }
+        changeStateTask(task)   
     }
 
 
@@ -36,13 +41,13 @@ export default function Task({task}) {
                     (<button
                         type="button"
                         className="completo"
-                        onClick={changeState}
+                        onClick={()=>changeState(task)}
                     >Complete</button>)
                 :    
                 (<button
                     type="button"
                     className="incompleto"
-                    onClick={changeState}
+                    onClick={()=>changeState(task)}
                 >Uncomplete</button>)
             }
             </div>

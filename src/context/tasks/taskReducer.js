@@ -29,7 +29,7 @@ export default (state, action) => {
             case STATE_TASK:
                 return{
                     ...state,
-                    task: 
+                    tasks: state.tasksproject.map(task => task.id === action.payload.id ? action.payload : task)
                 }
             
 

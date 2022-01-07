@@ -50,7 +50,7 @@ const TaskState = props => {
         })
     }
 
-    const changeState = task => {
+    const changeStateTask = task => {
         dispatch({
             type: STATE_TASK,
             payload: task
@@ -67,7 +67,7 @@ const TaskState = props => {
             addTask,
             validTask,
             deleteTask, 
-            changeState
+            changeStateTask
         }}
 
         
