@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import projectContext from '../../context/projects/projectContext'
 import taskContext from '../../context/tasks/taskContext'
 
@@ -9,8 +9,18 @@ export default function FormTask() {
     const {project} = projectsContext
 
     const tasksContext = useContext(taskContext) 
-    const {errorTask, addTask, validTask, getTasks} = tasksContext
-  
+    const {taskselected, errorTask, addTask, validTask, getTasks,updateTask, cleanTask} = tasksContext
+    
+    //effect to detect if there is a taskselected
+    useEffect(() => {
+        if(taskselected !== null){
+            setTask(taskselected)
+        }else{
+            setTask({
+                name: ''
+            })
+        }
+    }, [taskselected])
 
     const [task, setTask] = useState({
         name: ''
@@ -42,11 +52,23 @@ export default function FormTask() {
         }
         //pass validation
 
-        //add new task to the state of tasks
+        //if is edit or a new task
+        if(taskselected === null){
+            //new task
+        
+            //add new task to the state of tasks
   
         task.projectId = currentProject.id
         task.state = false
         addTask(task)
+        }else{
+            //update existing task
+            updateTask(task)
+            //delete task selected of the state
+            cleanTask()
+        }
+
+        
 
         //get and filter tasks
         getTasks(currentProject.id)
@@ -77,7 +99,9 @@ export default function FormTask() {
             <div className="input-text">
                 <input type="submit"
                 className="btn btn-primario btn-submit btn-block"
-                value="Add Task"/>    
+                value= {taskselected ? 'Edit task': 'Add task'}
+                
+                />    
             
             </div>
         </form>

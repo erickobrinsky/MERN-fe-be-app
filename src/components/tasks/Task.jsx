@@ -10,7 +10,7 @@ export default function Task({task}) {
     const {project} = projectsContext
 
     const tasksContext = useContext(taskContext) 
-    const {deleteTask, getTasks, changeStateTask} = tasksContext
+    const {deleteTask, getTasks, changeStateTask, setCurrentTask} = tasksContext
   
     //extract projec
     const [currentProject] = project
@@ -29,6 +29,11 @@ export default function Task({task}) {
             task.state = true
         }
         changeStateTask(task)   
+    }
+
+    //add current task when user wish to edit
+    const selectTask = task => {
+        setCurrentTask(task)
     }
 
 
@@ -55,6 +60,7 @@ export default function Task({task}) {
                 <button
                 className="btn btn-primario"
                 type="button"
+                onClick={()=>selectTask(task)}
                 >Edit</button>
 
                 <button
