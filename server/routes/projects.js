@@ -30,4 +30,12 @@ auth,
 projectController.updateProject
 )
 
+//delete projects by ID
+router.delete('/:id',
+auth, 
+projectController.deleteProject
+)
+
+
+
 module.exports = router
