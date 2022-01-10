@@ -4,13 +4,17 @@ import NewAccount from './components/auth/NewAccount'
 import Projects from './components/projects/Projects'
 import ProjectState from './context/projects/projectState'
 import TaskState from './context/tasks/taskState'
-
+import AlertState from './context/alerts/alertState'
+import AuthState from './context/authentification/authState'
 
 
 function App() {
+
   return (
     <ProjectState>
       <TaskState>
+        <AlertState>
+          <AuthState>
 <Router>
     <Routes>  
       <Route exact path="/" element={<Login/>}/>
@@ -18,6 +22,8 @@ function App() {
       <Route exact path="/projects" element={<Projects/>}/>
     </Routes>
 </Router>
+</AuthState>
+</AlertState>
 </TaskState>
 </ProjectState>
   );

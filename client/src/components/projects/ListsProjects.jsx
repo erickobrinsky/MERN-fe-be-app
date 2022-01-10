@@ -19,7 +19,7 @@ export default function ListsProjects() {
     //check is projects are empty
     if(projects.length === 0) return <p>No projects, start adding a new one</p>
 
-   console.log('hola');
+
 
     
     return (

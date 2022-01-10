@@ -1,8 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import AlertContext from '../../context/alerts/alertContext'
+import AuthContext from '../../context/authentification/authContext'
 
 
-export default function NewAccount() {
+export default function NewAccount(props) {
+    let navigate = useNavigate();
+    //extract values from context
+    const alertContext = useContext(AlertContext)
+    const {alert, showAlert} = alertContext
+
+    const authContext = useContext(AuthContext)
+    const {message, authentificated, registerUser} = authContext
+    
+    //in case user is already register or duplicate register
+    useEffect(() => {
+        if(authentificated) {
+            navigate('/projects');
+        }
+
+        if(message) {
+            showAlert(message.msg, message.category);
+        }
+        // eslint-disable-next-line
+    }, [message, authentificated, props.navigate]);
+
 
     //state to login
     const [user, setUser] = useState({
@@ -28,17 +51,31 @@ export default function NewAccount() {
         e.preventDefault()
 
         //valid not empty field
-
-        //send to the action function
+        if(name.trim() === '' || email.trim() === '' || password.trim() === '' || confirm.trim() === ''){
+            showAlert('Each field is mandatory', 'alerta-error' )
+        }
 
         //valid 2 password are equals
+        if(password !== confirm){
+            showAlert('Passwords are different', 'alerta-error')
+        }
+
+         //send to the action function
+         registerUser({
+             name,
+             email, 
+             password
+         })
     }
 
     return (
         <div className="form-usuario">
+            {alert ? (<div className={`alerta ${alert.category}`}>{alert.msg}</div>) : null}
             <div className="contenedor-form sombra-dark">
                 <h1>Get an account</h1>
-                <form >
+                <form 
+                    onSubmit={onSubmit}
+                >
                 <div className="campo-form">
                         <label htmlFor="email">Name</label>
                         <input 
