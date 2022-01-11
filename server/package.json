@@ -1,6 +1,9 @@
 {
   "name": "merntaskserver",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.13.1"
+  },
   "description": "MERN API to MERN Tasks",
   "main": "index.js",
   "scripts": {
