@@ -75,7 +75,7 @@ const AuthState = props => {
         try {
 
             const response = await clientAxios.post('/api/auth', datos)
-            
+            console.log(response);
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: response.data
@@ -85,7 +85,7 @@ const AuthState = props => {
 
 
         } catch (error) {
-            console.log(error.response.data.msg);
+         
             const alert ={
                 msg: error.response.data.msg, 
                 category: 'alerta-error'
