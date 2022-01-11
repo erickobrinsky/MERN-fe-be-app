@@ -7,7 +7,7 @@
   "description": "MERN API to MERN Tasks",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "start": "node index.js",
     "dev": "nodemon ."
   },
   "author": "Eric Kobrinsky",

@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.json({extends: true}))
 
 //app port
-const PORT = process.env.PORT || 4000
+// const port = process.env.port || 4000
 
 //import routes 
 app.use('/api/users', require('./routes/users'))
@@ -24,6 +24,6 @@ app.use('/api/projects', require('./routes/projects'))
 app.use('/api/tasks', require('./routes/tasks'))
 
 //start app
-app.listen(PORT, ()=>{
-    console.log(`listening on port ${PORT}`)
-})
+app.listen(process.env.PORT || 4000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
