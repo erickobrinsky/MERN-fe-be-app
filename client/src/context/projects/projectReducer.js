@@ -1,6 +1,6 @@
-import {FORM_PROJECT, GET_PROJECTS, ADD_PROJECTS, VALID_FORM, CURRENT_PROJECT, DELETE_PROJECT} from '../../types'
+import {FORM_PROJECT, GET_PROJECTS, ADD_PROJECTS, VALID_FORM, CURRENT_PROJECT, DELETE_PROJECT, PROJECT_ERROR} from '../../types'
 
-
+// eslint-disable-next-line
 export default (state, action) => {
         switch(action.type) {
 
@@ -33,16 +33,21 @@ export default (state, action) => {
                     return{
                        //filter to know in which project the user clicked, filter and create a new array called project
                        ...state,
-                       project: state.projects.filter(project => project.id === action.payload)
+                       project: state.projects.filter(project => project._id === action.payload)
                     }
                     case DELETE_PROJECT:
                         return{
                          
                            ...state,
                             //this filter with !== bring all projects that are not equals to the select
-                           projects: state.projects.filter(project => project.id !== action.payload),
+                           projects: state.projects.filter(project => project._id !== action.payload),
                            project: null
                         }
+                        case PROJECT_ERROR:
+                            return{
+                               ...state,
+                               message: action.payload 
+                            }
                 
 
             default: 

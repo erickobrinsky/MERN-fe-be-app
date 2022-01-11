@@ -1,16 +1,16 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {Link} from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from 'react-router-dom'
+
 import AlertContext from '../../context/alerts/alertContext'
 import AuthContext from '../../context/authentification/authContext'
 
 
 export default function NewAccount(props) {
-    let navigate = useNavigate();
+
     //extract values from context
     const alertContext = useContext(AlertContext)
     const {alert, showAlert} = alertContext
-
+    let navigate = useNavigate()
     const authContext = useContext(AuthContext)
     const {message, authentificated, registerUser} = authContext
     

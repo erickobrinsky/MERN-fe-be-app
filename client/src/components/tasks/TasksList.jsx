@@ -1,7 +1,7 @@
 import React, {Fragment, useContext} from 'react'
 import Task from './Task'
 import projectContext from '../../context/projects/projectContext'
-import taskContext from '../../context/tasks/taskContext'
+import TaskContext from '../../context/tasks/taskContext'
 
 
 export default function TasksList() {
@@ -9,8 +9,8 @@ export default function TasksList() {
     const projectsContext = useContext(projectContext)
     const {project, deleteProject} = projectsContext
 
-    const tasksContext = useContext(taskContext) 
-    const {getTasks, tasksproject} = tasksContext
+    const tasksContext = useContext(TaskContext) 
+    const {tasksproject} = tasksContext
 
 
     //if no project selected
@@ -19,11 +19,11 @@ export default function TasksList() {
     //array destructuring to extract current porject
     const [currentProject] = project
     
-    const tasksProject = []
+
    
     //delete project
     const onClickDelete = () =>{
-        deleteProject(currentProject.id)
+        deleteProject(currentProject._id)
     }
 
 
@@ -31,7 +31,7 @@ export default function TasksList() {
         <Fragment>
        <h2>Project: {currentProject.name}</h2>
        <ul className="listado-tareas">
-        {tasksproject.lenght === 0
+        {tasksproject.length === 0
             ?
             (<li className="tarea"><p>No taks</p></li>)
 

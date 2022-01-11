@@ -58,8 +58,8 @@ export default function FormTask() {
         
             //add new task to the state of tasks
   
-        task.projectId = currentProject.id
-        task.state = false
+        task.project = currentProject._id
+        // task.state = false
         addTask(task)
         }else{
             //update existing task
@@ -71,7 +71,7 @@ export default function FormTask() {
         
 
         //get and filter tasks
-        getTasks(currentProject.id)
+        getTasks(currentProject._id)
 
         //restart form
         setTask({

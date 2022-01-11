@@ -3,6 +3,8 @@ import AuthContext from './authContext'
 import AuthReducer from './authReducer'
 import {REGISTER_SUCCESS, REGISTER_ERROR, GET_USER, LOGIN_SUCCESS, LOGIN_ERROR, LOG_OUT } from '../../types'
 import clientAxios from '../../config/axios'
+import tokenAuth from '../../config/tokenAuth'
+
 
 
 const AuthState = props => {
@@ -26,6 +28,8 @@ const AuthState = props => {
                 payload: response.data
             })
 
+            //get user authentificated
+            userAuthenticate()
 
         } catch (error) {
             // console.log(error.response.data.msg);
@@ -41,6 +45,68 @@ const AuthState = props => {
     }
     }
 
+    //send user authenticate
+    const userAuthenticate = async () => {
+        const token = localStorage.getItem('token')
+        if(token){
+            //todo function to send toker by headers
+            tokenAuth(token)
+        }
+        try {
+            const response = await clientAxios.get('/api/auth')
+            dispatch({
+                type: GET_USER,
+                payload: response.data
+            })
+
+              //get user authentificated
+              userAuthenticate()
+
+          
+        } catch (error) {
+            dispatch({
+                 type: LOGIN_ERROR,
+                })
+        }
+    }
+
+    //login
+    const loginUser = async datos => {
+        try {
+
+            const response = await clientAxios.post('/api/auth', datos)
+            
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: response.data
+            })
+
+            userAuthenticate()
+
+
+        } catch (error) {
+            console.log(error.response.data.msg);
+            const alert ={
+                msg: error.response.data.msg, 
+                category: 'alerta-error'
+            }
+      
+        dispatch({
+            type: LOGIN_ERROR,
+            payload: alert
+        })
+    }
+}
+
+//logout
+const logOut = () => {
+    dispatch({
+        type: LOG_OUT,
+    })
+    window.location.href = '/'
+}
+
+
     return(
         <AuthContext.Provider
             value= {{
@@ -48,7 +114,10 @@ const AuthState = props => {
                 authentificated: state.authentificated,
                 user: state.user,
                 message: state.message,
-                registerUser
+                registerUser,
+                userAuthenticate,
+                loginUser,
+                logOut
             }}
         
         >
@@ -59,5 +128,6 @@ const AuthState = props => {
     )
 
 }
+
 
 export default AuthState

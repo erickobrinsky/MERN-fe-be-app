@@ -42,7 +42,7 @@ exports.createTask = async (req, res) => {
 exports.getTasks = async (req, res) => {
     try {
                //extract project and check if exist
-               const {project} = req.body
+               const {project} = req.query
 
                const existProject = await Project.findById(project)
                if(!existProject) {
@@ -54,7 +54,7 @@ exports.getTasks = async (req, res) => {
                }
 
                //get tasks by project
-               const task = await Task.find({project})
+               const task = await Task.find({project}).sort({created: -1})
                res.json({task})
    
     } catch (error) {
@@ -83,8 +83,8 @@ try {
 
                //create an object with new info
                 const newTask = {}
-                if(name) newTask.name = name
-                if(state) newTask.state = state
+                newTask.name = name
+                newTask.state = state
             
                 task = await Task.findOneAndUpdate({_id: req.params.id }, newTask, {new: true} )
 
@@ -101,7 +101,7 @@ try {
 //delete task
 exports.deleteTask = async (req, res) => {
 try{
-    const {project} = req.body
+    const {project} = req.query
 
     let task = await Task.findById(req.params.id)
 

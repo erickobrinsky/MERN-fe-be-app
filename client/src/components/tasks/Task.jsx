@@ -10,14 +10,14 @@ export default function Task({task}) {
     const {project} = projectsContext
 
     const tasksContext = useContext(taskContext) 
-    const {deleteTask, getTasks, changeStateTask, setCurrentTask} = tasksContext
+    const {deleteTask, getTasks, updateTask, setCurrentTask} = tasksContext
   
     //extract projec
     const [currentProject] = project
 
     //function that is executed when user clicked on delete task button
     const taskDelete = id => {
-        deleteTask(id)
+        deleteTask(id, currentProject._id )
         getTasks(currentProject.id)
     }
 
@@ -28,7 +28,8 @@ export default function Task({task}) {
         } else {
             task.state = true
         }
-        changeStateTask(task)   
+        // changeStateTask(task) 
+        updateTask(task)  
     }
 
     //add current task when user wish to edit
@@ -66,7 +67,7 @@ export default function Task({task}) {
                 <button
                   className="btn btn-secundario"
                   type="button"
-                  onClick={()=> taskDelete(task.id)}
+                  onClick={()=> taskDelete(task._id)}
                 >
                     Delete 
                 </button>

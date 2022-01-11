@@ -1,4 +1,5 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/auth/Login'
 import NewAccount from './components/auth/NewAccount'
 import Projects from './components/projects/Projects'
@@ -6,6 +7,15 @@ import ProjectState from './context/projects/projectState'
 import TaskState from './context/tasks/taskState'
 import AlertState from './context/alerts/alertState'
 import AuthState from './context/authentification/authState'
+import tokenAuth from './config/tokenAuth'
+// import PrivateRoute from './components/routes/privateRoute'
+
+
+//check if there is any token
+const token = localStorage.getItem('token')
+if(token){
+  tokenAuth(token)
+}
 
 
 function App() {
