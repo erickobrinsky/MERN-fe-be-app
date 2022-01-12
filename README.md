@@ -1,6 +1,6 @@
 # MERN-fe-be-app
 
-## I built this app using MongoDB, React, Nodejs y Express.
+## I built this app using MongoDB, React, Nodejs and Express.
 
 This is a useful app to add your projects with their tasks. 
 
