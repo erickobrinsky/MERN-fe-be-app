@@ -70,7 +70,7 @@ export default function NewAccount(props) {
 
     return (
         <div className="form-usuario">
-            {alert ? (<div className={`alerta ${alert.category}`}>{alert.msg}</div>) : null}
+            {alert ? (<div data-cy="alert" className={`alerta ${alert.category}`}>{alert.msg}</div>) : null}
             <div className="contenedor-form sombra-dark">
                 <h1 data-cy="title">Get an account</h1>
                 <form 
@@ -80,6 +80,7 @@ export default function NewAccount(props) {
                 <div className="campo-form">
                         <label htmlFor="email">Name</label>
                         <input 
+                        data-cy="name-input"
                         type="text"
                         id="name"
                         name="name"
@@ -126,6 +127,7 @@ export default function NewAccount(props) {
                         type="submit"
                         className="btn btn-primario btn-block"
                         value="register"
+                        data-cy="submit-new-account"
                         />
                     </div>
                 </form>
