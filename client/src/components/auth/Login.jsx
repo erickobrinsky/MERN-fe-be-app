@@ -58,7 +58,7 @@ export default function Login(props) {
         <div className="form-usuario">
               {alert ? (<div className={`alerta ${alert.category}`}>{alert.msg}</div>) : null}
             <div className="contenedor-form sombra-dark">
-                <h1>Login</h1>
+                <h1 data-cy="title">Login</h1>
                 <form 
                     onSubmit={onSubmit}
                 >
