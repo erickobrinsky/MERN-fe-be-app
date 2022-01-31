@@ -72,9 +72,10 @@ export default function NewAccount(props) {
         <div className="form-usuario">
             {alert ? (<div className={`alerta ${alert.category}`}>{alert.msg}</div>) : null}
             <div className="contenedor-form sombra-dark">
-                <h1>Get an account</h1>
+                <h1 data-cy="title">Get an account</h1>
                 <form 
                     onSubmit={onSubmit}
+                    data-cy="new-account"
                 >
                 <div className="campo-form">
                         <label htmlFor="email">Name</label>

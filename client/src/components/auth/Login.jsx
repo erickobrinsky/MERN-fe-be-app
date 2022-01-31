@@ -61,10 +61,12 @@ export default function Login(props) {
                 <h1 data-cy="title">Login</h1>
                 <form 
                     onSubmit={onSubmit}
+                    data-cy="form-login"
                 >
                     <div className="campo-form">
                         <label htmlFor="email">Email</label>
                         <input 
+                        data-cy="email-input"
                         type="email"
                         id="email"
                         name="email"
@@ -89,10 +91,11 @@ export default function Login(props) {
                         type="submit"
                         className="btn btn-primario btn-block"
                         value="login"
+                        data-cy="submit-login"
                         />
                     </div>
                 </form>
-                <Link to={'/new-account'} className="enlace-cuenta">
+                <Link data-cy='new-account' to={'/new-account'} className="enlace-cuenta">
                     Get a new account
                 </Link>
             </div>
